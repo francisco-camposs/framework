@@ -1,7 +1,6 @@
 package br.ufrn.imd.Framework.model;
 
 import br.ufrn.imd.Framework.abstracts.AbstractEntity;
-import br.ufrn.imd.Framework.enuns.InvestimentType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
