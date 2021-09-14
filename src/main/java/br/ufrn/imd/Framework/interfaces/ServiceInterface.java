@@ -1,0 +1,68 @@
+package br.ufrn.imd.Framework.interfaces;
+
+import br.ufrn.imd.Framework.abstracts.AbstractEntity;
+import br.ufrn.imd.Framework.service.AppUserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+
+public interface ServiceInterface<
+        E extends AbstractEntity,
+        R extends JpaRepository<E, UUID> > {
+
+    AppUserService getAppUserService();
+
+    R getRepository();
+
+
+    @Transactional
+    default E post(E entity){
+        this.prePost(entity);
+        entity.setCreatedAt(LocalDateTime.now());
+        entity = this.getRepository().save(entity);
+        return entity;
+    }
+
+    @Transactional
+    default E put(E entity){
+        if (entity.getId() == null)
+            throw new IllegalStateException("This entity doesn't exists");
+        this.prePut(entity);
+        entity.setEditedAt(LocalDateTime.now());
+        entity = this.getRepository().save(entity);
+        return entity;
+    }
+
+    void prePost(E entity);
+
+    void prePut(E entity);
+
+
+    default E findById(UUID id){
+        return this.getRepository().findById(id).orElseThrow(() -> new IllegalStateException("This id not exists"));
+    }
+
+    default List<E> findAll(){
+        return this.getRepository().findAll();
+    }
+
+    default List<E> findPagedContent(Long id){
+        Pageable firstPageWithTenElements = PageRequest.of(Math.toIntExact(id), 5);
+        Page<E> allContent = getRepository().findAll(firstPageWithTenElements);
+        return allContent.getContent();
+    }
+
+
+    @Transactional
+    default void delete(UUID id){
+        E entity = this.getRepository().findById(id).orElseThrow(() -> new IllegalStateException("This id not exists"));
+        this.getRepository().delete(entity);
+    }
+
+}
