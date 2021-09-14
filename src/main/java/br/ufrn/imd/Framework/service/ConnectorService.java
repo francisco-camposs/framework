@@ -13,6 +13,8 @@ public interface ConnectorService {
 
     List<Income> getIncomes();
 
+    List<Investment> getInvestments();
+
     BigDecimal getValue();
 
 }
