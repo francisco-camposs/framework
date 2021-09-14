@@ -9,31 +9,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
-@Table(name = BankAccount.SNAKE_NAME)
-public class BankAccount extends AbstractEntity {
-    public static final String SNAKE_NAME = "bank_account";
-    public static final String CAMEL_NAME = "bankAccount";
+@Table(name = Wallet.SNAKE_NAME)
+public class Wallet extends AbstractEntity {
+
+    public static final String SNAKE_NAME = "bank";
+    public static final String CAMEL_NAME = "bank";
     public static final String ID_COLUMN_NAME = SNAKE_NAME + "_id";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = BankAccount.ID_COLUMN_NAME, nullable = false)
+    @Column(name = Wallet.ID_COLUMN_NAME, nullable = false)
     private UUID id;
 
-    private String number;
+    private String username;
 
-    private String agency;
+    private String accessCode;
 
-    @ManyToOne
-    @JoinColumn(name = Bank.ID_COLUMN_NAME)
-    private Bank bank;
+    private Integer walletCode;
 
 }

@@ -23,7 +23,7 @@ public class Bank extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = AppUser.ID_COLUMN, nullable = false)
+    @Column(name = Bank.ID_COLUMN_NAME, nullable = false)
     private UUID id;
 
     private String name;
