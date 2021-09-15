@@ -17,6 +17,7 @@ import java.util.UUID;
 public class ExtraordinaryExpenseService implements ExpenseInterface<ExtraordinaryExpense> {
 
     private final ExtraordinaryExpenseRepository extraordinaryExpenseRepository;
+    private final AppUserService appUserService;
 
     @Override
     public ExtraordinaryExpense save(ExtraordinaryExpense expense) {

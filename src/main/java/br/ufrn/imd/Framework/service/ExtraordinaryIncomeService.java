@@ -1,13 +1,17 @@
 package br.ufrn.imd.Framework.service;
 
+import br.ufrn.imd.Framework.model.AppUser;
 import br.ufrn.imd.Framework.model.ExtraordinaryIncome;
 import br.ufrn.imd.Framework.repository.AppUserRepository;
 import br.ufrn.imd.Framework.repository.ExtraordinaryIncomeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,12 +23,16 @@ public class ExtraordinaryIncomeService implements IncomeInterface<Extraordinary
 
     private final ExtraordinaryIncomeRepository extraordinaryIncomeRepository;
 
-    private final AppUserRepository appUserRepository;
+    private final AppUserService appUserService;
 
     @Override
     public ExtraordinaryIncome save(ExtraordinaryIncome expense) {
         prePost(expense);
-        return extraordinaryIncomeRepository.save(expense);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser user = appUserService.getAppUser(authentication.getPrincipal().toString());
+        expense.setCreatedBy(user);
+        expense.setCreatedAt(LocalDateTime.now());
+        return this.extraordinaryIncomeRepository.save(expense);
     }
 
     @Override
@@ -36,6 +44,10 @@ public class ExtraordinaryIncomeService implements IncomeInterface<Extraordinary
     @Override
     public ExtraordinaryIncome edit(ExtraordinaryIncome expense) {
         prePut(expense);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser user = appUserService.getAppUser(authentication.getPrincipal().toString());
+        expense.setEditedBy(user);
+        expense.setEditedAt(LocalDateTime.now());
         return extraordinaryIncomeRepository.save(expense);
     }
 

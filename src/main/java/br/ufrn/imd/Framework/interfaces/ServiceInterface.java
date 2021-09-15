@@ -1,11 +1,14 @@
 package br.ufrn.imd.Framework.interfaces;
 
 import br.ufrn.imd.Framework.abstracts.AbstractEntity;
+import br.ufrn.imd.Framework.model.AppUser;
 import br.ufrn.imd.Framework.service.AppUserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -24,6 +27,9 @@ public interface ServiceInterface<
     @Transactional
     default E post(E entity){
         this.prePost(entity);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser user = getAppUserService().getAppUser(authentication.getPrincipal().toString());
+        entity.setCreatedBy(user);
         entity.setCreatedAt(LocalDateTime.now());
         entity = this.getRepository().save(entity);
         return entity;
@@ -34,6 +40,9 @@ public interface ServiceInterface<
         if (entity.getId() == null)
             throw new IllegalStateException("This entity doesn't exists");
         this.prePut(entity);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser user = getAppUserService().getAppUser(authentication.getPrincipal().toString());
+        entity.setEditedBy(user);
         entity.setEditedAt(LocalDateTime.now());
         entity = this.getRepository().save(entity);
         return entity;

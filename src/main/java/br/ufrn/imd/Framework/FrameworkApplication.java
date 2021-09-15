@@ -46,7 +46,6 @@ public class FrameworkApplication {
 			userService.addAppRoleToAppUser("leonardo.dicaprio@gmail.com", "ADMIN_ROLE");
 			userService.addAppRoleToAppUser("leonardo.dicaprio@gmail.com", "SUPER_ADMIN_ROLE");
 			userService.addAppRoleToAppUser("brad.pitt@gmail.com", "USER_ROLE");
-
 		};
 	}
 

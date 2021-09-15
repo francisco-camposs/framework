@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/bank")
+@RequestMapping("/api/bank-account")
 @AllArgsConstructor
 public class BankAccountController implements ControllerInterface<BankAccount, BankAccountRepository, BankAccountService> {
 

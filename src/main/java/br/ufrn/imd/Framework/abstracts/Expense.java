@@ -14,16 +14,8 @@ import java.util.UUID;
 @Setter
 @MappedSuperclass
 @EqualsAndHashCode
-public class Expense {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = AppUser.ID_COLUMN, nullable = false)
-    private UUID id;
+public abstract class Expense extends AbstractEntity{
 
     private BigDecimal value;
 
-    @ManyToOne
-    @JoinColumn(name = AppUser.ID_COLUMN, nullable = false)
-    private AppUser user;
 }

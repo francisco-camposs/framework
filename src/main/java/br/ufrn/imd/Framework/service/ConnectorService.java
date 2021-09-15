@@ -1,7 +1,7 @@
 package br.ufrn.imd.Framework.service;
 
 import br.ufrn.imd.Framework.abstracts.Expense;
-import br.ufrn.imd.Framework.abstracts.Income;
+import br.ufrn.imd.Framework.model.ExtraordinaryIncome;
 import br.ufrn.imd.Framework.model.Investment;
 
 import java.math.BigDecimal;
@@ -11,7 +11,7 @@ public interface ConnectorService {
 
     List<Expense> getExpenses();
 
-    List<Income> getIncomes();
+    List<ExtraordinaryIncome> getIncomes();
 
     List<Investment> getInvestments();
 

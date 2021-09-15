@@ -1,6 +1,7 @@
 package br.ufrn.imd.Framework.model;
 
 import br.ufrn.imd.Framework.abstracts.Income;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.Column;

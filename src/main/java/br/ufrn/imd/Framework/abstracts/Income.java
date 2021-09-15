@@ -13,10 +13,6 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class Income extends AbstractEntity{
 
-    private BigDecimal value;
-
-    @ManyToOne
-    @JoinColumn(name = AppUser.ID_COLUMN, nullable = false)
-    private AppUser user;
+    private Double value;
 
 }

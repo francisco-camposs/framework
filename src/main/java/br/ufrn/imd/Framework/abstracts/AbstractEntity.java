@@ -1,11 +1,13 @@
 package br.ufrn.imd.Framework.abstracts;
 
 import br.ufrn.imd.Framework.model.AppUser;
+import br.ufrn.imd.Framework.service.AppUserService;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -47,21 +49,5 @@ public abstract class AbstractEntity {
     @JoinColumn(name = "edited_by")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected AppUser editedBy;
-
-    @PrePersist
-    public void prePersist(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AppUser user = (AppUser) authentication.getPrincipal();
-        this.setCreatedBy(user);
-        this.setCreatedAt(LocalDateTime.now());
-    }
-
-    @PreUpdate
-    public void preUpdate(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AppUser user = (AppUser) authentication.getPrincipal();
-        this.setEditedBy(user);
-        this.setEditedAt(LocalDateTime.now());
-    }
 
 }
