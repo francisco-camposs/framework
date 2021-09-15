@@ -4,7 +4,7 @@ import br.ufrn.imd.Framework.dto.InvestmentDTO;
 
 import java.util.List;
 
-public interface SugestionAlgorithm {
+public interface SuggestionAlgorithm {
 
     public List<InvestmentDTO> run();
 

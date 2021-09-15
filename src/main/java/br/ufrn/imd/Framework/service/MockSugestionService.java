@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MockSugestionService implements SugestionAlgorithm{
+public class MockSugestionService implements SuggestionAlgorithm {
 
     @Override
     public List<InvestmentDTO> run() {

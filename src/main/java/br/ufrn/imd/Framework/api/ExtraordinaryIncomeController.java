@@ -1,7 +1,6 @@
 package br.ufrn.imd.Framework.api;
 
 import br.ufrn.imd.Framework.model.ExtraordinaryIncome;
-import br.ufrn.imd.Framework.model.RecurrentIncome;
 import br.ufrn.imd.Framework.service.ExtraordinaryIncomeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -5,9 +5,11 @@ import br.ufrn.imd.Framework.model.Bank;
 import br.ufrn.imd.Framework.repository.BankRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.stereotype.Service;
 
 @Getter
 @AllArgsConstructor
+@Service
 public class BankService implements ServiceInterface<Bank, BankRepository> {
 
     private AppUserService appUserService;
